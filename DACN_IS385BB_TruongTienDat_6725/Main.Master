@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="DACN_IS385BB_TruongTienDat_6725.Main" %>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head runat="server">
+    <title>VY FOOD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/site.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <div class="container mt-3">
+        <h1 class="text-center text-primary">Vy Food</h1>
+        <form id="form1" runat="server">
+            <div class="row">
+                <div class="col-md-8">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+                </div>
+                <div class="col-md-4">
+                    <% if (Session["Email"] == null) { %>
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">Thông Tin Đăng Nhập</div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="tk" class="form-label">Email</label>
+                                    <asp:TextBox ID="tk" runat="server" CssClass="form-control" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pass" class="form-label">Mật Khẩu</label>
+                                    <asp:TextBox ID="pass" runat="server" TextMode="Password" CssClass="form-control" />
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input id="Checkbox1" type="checkbox" class="form-check-input" />
+                                    <label class="form-check-label" for="Checkbox1">Ghi Nhớ Mật Khẩu</label>
+                                </div>
+                                <div class="d-grid gap-2 mb-2">
+                                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Đăng Nhập" CssClass="btn btn-success" />
+                                    <asp:Button ID="ButtonCart" runat="server" OnClick="ButtonCart_Click" Text="Xem Giỏ Hàng" CssClass="btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="card shadow-sm text-center">
+                            <div class="card-body">
+                                <p class="fw-bold text-success">Xin chào, <%= Server.HtmlEncode(Session["Email"].ToString()) %>!</p>
+                                <div class="d-grid gap-2 mb-2">
+                                    <asp:Button ID="ButtonLogout" runat="server" OnClick="ButtonLogout_Click" Text="Đăng Xuất" CssClass="btn btn-danger" />
+                                    <asp:Button ID="Button2" runat="server" OnClick="ButtonCart_Click" Text="Xem Giỏ Hàng" CssClass="btn btn-warning" />
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
